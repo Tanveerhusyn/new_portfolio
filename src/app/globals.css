@@ -108,10 +108,4 @@
     border: 0;
   }
 }
-body {
-  background-image: url('/background-2.jpg'); /* Adjust the path as necessary */
-  background-size: cover; /* Cover the entire body */
-  background-position: center; /* Center the background image */
-  background-repeat: no-repeat; /* Do not repeat the image */
-  object-fit: cover;
-}
+

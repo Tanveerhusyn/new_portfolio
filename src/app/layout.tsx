@@ -53,9 +53,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='en' suppressHydrationWarning>
-      <body className={`${GeistSans.variable} ${GeistMono.variable} font-mono`}>
+      <body className={`${GeistSans.variable} ${GeistMono.variable} font-mono relative`}>
+        <video playsInline autoPlay muted loop>
+          <source src='/background-vid.mp4' type='video/mp4' />
+          Your browser does not support the video tag.
+        </video>
         <ThemeWrapper attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
-          <main>
+          <main className='absolute left-50 top-50'>
             <NavbarProvider>
               <Navbar />
               <NavbarMobile />
