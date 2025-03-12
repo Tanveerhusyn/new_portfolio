@@ -40,11 +40,8 @@ export default async function ProjectDetail({ params }: { params: ParamsProps })
   if (!about) return notFound()
 
   return (
-    <MDXComponent
-      code={about.body.code}
-      className={
-        'prose-h2:text-foreground font-sans prose-h3:text-foreground prose-p:text-muted-foreground prose-a:text-foreground prose-li:text-muted-foreground prose-img:w-2/3 prose-img:mx-auto prose-strong:text-foreground prose-h4:text-foreground prose-a:no-underline'
-      }
-    />
+    <div className='prose-h2:text-foreground font-sans prose-h3:text-foreground prose-p:text-muted-foreground prose-a:text-foreground prose-li:text-muted-foreground prose-img:w-2/3 prose-img:mx-auto prose-strong:text-foreground prose-h4:text-foreground prose-a:no-underline'>
+      <MDXComponent code={about.body.code} />
+    </div>
   )
 }

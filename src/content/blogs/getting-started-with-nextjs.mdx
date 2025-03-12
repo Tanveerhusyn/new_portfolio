@@ -1,0 +1,180 @@
+---
+title: 'Getting Started with Next.js: A Comprehensive Guide'
+summary: 'Learn how to build modern web applications with Next.js, a powerful React framework that provides server-side rendering, static site generation, and more.'
+publishedDate: 'March 12, 2024'
+author: 'Tanveer Ahmed'
+coverImage: '/projects/verdict-com.webp'
+tag:
+  - React
+  - Next.js
+  - Web Development
+featured: true
+---
+
+# Getting Started with Next.js: A Comprehensive Guide
+
+Next.js has revolutionized the way developers build React applications by providing a powerful framework that combines the best of server-side rendering and static site generation. In this comprehensive guide, we'll explore how to get started with Next.js and leverage its features to build modern web applications.
+
+## What is Next.js?
+
+Next.js is a React framework that enables functionality such as server-side rendering, static site generation, and API routes. It's designed to make building React applications more intuitive and efficient, with features like:
+
+- **Server-Side Rendering (SSR)**: Renders pages on the server for improved SEO and initial load performance
+- **Static Site Generation (SSG)**: Pre-renders pages at build time for optimal performance
+- **Incremental Static Regeneration (ISR)**: Updates static pages after deployment without rebuilding the entire site
+- **API Routes**: Create API endpoints as part of your Next.js application
+- **File-based Routing**: Automatically creates routes based on your file structure
+- **Built-in CSS and Sass Support**: Import CSS and Sass files directly in your components
+- **Image Optimization**: Automatically optimize images for better performance
+
+## Setting Up Your First Next.js Project
+
+Getting started with Next.js is straightforward. Here's how to create your first project:
+
+```bash
+npx create-next-app@latest my-next-app
+cd my-next-app
+npm run dev
+```
+
+This will create a new Next.js project with a default template and start the development server. You can now access your application at `http://localhost:3000`.
+
+## Understanding the File Structure
+
+A typical Next.js project has the following structure:
+
+```
+my-next-app/
+├── node_modules/
+├── public/          # Static assets
+├── src/             # Source code
+│   ├── app/         # App Router
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── components/  # React components
+│   └── styles/      # CSS styles
+├── next.config.js   # Next.js configuration
+├── package.json     # Project dependencies
+└── tsconfig.json    # TypeScript configuration
+```
+
+## Creating Pages
+
+With the App Router in Next.js 13+, you create pages by adding a `page.tsx` file in the appropriate directory under `src/app`. For example:
+
+```tsx
+// src/app/about/page.tsx
+export default function AboutPage() {
+  return (
+    <div>
+      <h1>About Us</h1>
+      <p>This is the about page of our Next.js application.</p>
+    </div>
+  )
+}
+```
+
+This will create a page accessible at `/about`.
+
+## Data Fetching
+
+Next.js provides several ways to fetch data for your pages:
+
+### Server Components (Default in App Router)
+
+```tsx
+// This component will be rendered on the server
+export default async function Page() {
+  const data = await fetch('https://api.example.com/data')
+  const jsonData = await data.json()
+
+  return (
+    <div>
+      <h1>Data from API</h1>
+      <pre>{JSON.stringify(jsonData, null, 2)}</pre>
+    </div>
+  )
+}
+```
+
+### Client Components
+
+```tsx
+'use client'
+
+import { useState, useEffect } from 'react'
+
+export default function ClientComponent() {
+  const [data, setData] = useState(null)
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch('https://api.example.com/data')
+      const jsonData = await response.json()
+      setData(jsonData)
+    }
+
+    fetchData()
+  }, [])
+
+  return (
+    <div>
+      <h1>Client-side Data Fetching</h1>
+      {data ? <pre>{JSON.stringify(data, null, 2)}</pre> : <p>Loading...</p>}
+    </div>
+  )
+}
+```
+
+## Styling in Next.js
+
+Next.js supports various styling methods:
+
+### CSS Modules
+
+```tsx
+// Import the CSS module
+import styles from './Button.module.css'
+
+export default function Button() {
+  return <button className={styles.button}>Click me</button>
+}
+```
+
+### Global CSS
+
+```tsx
+// In src/app/layout.tsx
+import './globals.css'
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang='en'>
+      <body>{children}</body>
+    </html>
+  )
+}
+```
+
+### Tailwind CSS
+
+Next.js has built-in support for Tailwind CSS:
+
+```tsx
+export default function Card() {
+  return (
+    <div className='bg-white rounded-lg shadow-md p-6'>
+      <h2 className='text-xl font-bold mb-4'>Card Title</h2>
+      <p className='text-gray-600'>Card content goes here.</p>
+    </div>
+  )
+}
+```
+
+## Conclusion
+
+Next.js provides a powerful and flexible framework for building modern web applications with React. Its features like server-side rendering, static site generation, and file-based routing make it an excellent choice for projects of all sizes.
+
+By following this guide, you should now have a good understanding of how to get started with Next.js and leverage its features to build high-performance web applications.
+
+Happy coding!

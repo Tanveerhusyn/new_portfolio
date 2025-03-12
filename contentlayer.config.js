@@ -102,6 +102,82 @@ const Articles = defineDocumentType(() => ({
   }
 }))
 
+/** @type {import('contentlayer/source-files').defineDocumentType} */
+const Blogs = defineDocumentType(() => ({
+  name: 'Blogs',
+  filePathPattern: `blogs/**/*.mdx`,
+  contentType: 'mdx',
+  fields: {
+    title: { type: 'string', required: true },
+    summary: { type: 'string', required: true },
+    publishedDate: { type: 'string', required: true },
+    author: { type: 'string', required: true },
+    coverImage: { type: 'string', required: true },
+    tag: {
+      type: 'list',
+      of: { type: 'string' },
+      required: true
+    },
+    featured: {
+      type: 'boolean',
+      required: false,
+      default: false
+    }
+  },
+  computedFields: {
+    ...computedFields,
+    headings: {
+      type: 'json',
+      resolve: async doc => {
+        const regXHeader = /\n(?<flag>#{1,6})\s+(?<content>.+)/g
+        const headings = Array.from(doc.body.raw.matchAll(regXHeader)).map(({ groups }) => {
+          const flag = groups?.flag
+          const content = groups?.content
+          let level = ''
+
+          switch (flag?.length) {
+            case 1:
+              level = 'one'
+              break
+            case 2:
+              level = 'two'
+              break
+            case 3:
+              level = 'three'
+              break
+            case 4:
+              level = 'four'
+              break
+            case 5:
+              level = 'five'
+              break
+            case 6:
+              level = 'six'
+              break
+            default:
+              level = 'unknown'
+          }
+
+          return {
+            level: level,
+            text: content
+          }
+        })
+        return headings
+      }
+    },
+    readingTime: {
+      type: 'number',
+      resolve: doc => {
+        const wordsPerMinute = 200
+        const content = doc.body.raw
+        const words = content.split(/\s+/).length
+        return Math.ceil(words / wordsPerMinute)
+      }
+    }
+  }
+}))
+
 /** @type {import('rehype-pretty-code').Options} */
 const rehypePrettyOptions = {
   theme: {
@@ -114,7 +190,7 @@ const rehypePrettyOptions = {
 /** @type {import('contentlayer/source-files').SourcePlugin} */
 export default makeSource({
   contentDirPath: './src/content',
-  documentTypes: [About, Projects, Articles],
+  documentTypes: [About, Projects, Articles, Blogs],
   mdx: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings, [rehypePrettyCode, rehypePrettyOptions]]

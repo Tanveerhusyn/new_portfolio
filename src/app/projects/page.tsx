@@ -1,7 +1,6 @@
 import { allProjects } from 'contentlayer/generated'
-
-import { ProjectCard } from '@/components/molecules/project-card'
-import { FadeIn, FadeInStagger, AnimatePresence } from '@/components/atoms/fade-in'
+import { Project } from '@/data/projects'
+import { ProjectShowcase } from '@/components/molecules/project-showcase'
 
 type SearchParamsProps = {
   searchParams: {
@@ -9,19 +8,29 @@ type SearchParamsProps = {
   }
 }
 
-export default async function ProjectPage({ searchParams }: SearchParamsProps) {
+export default function ProjectPage({ searchParams }: SearchParamsProps) {
   const { tag } = searchParams
-  let filteredProjects = tag ? allProjects.filter(project => project.tag.includes(tag)) : allProjects
+
+  // Convert contentlayer projects to the Project type expected by ProjectCard
+  const projects: Project[] = allProjects.map(project => ({
+    title: project.title,
+    slug: project.slug,
+    summary: project.summary,
+    image: project.image,
+    tag: project.tag,
+    body: {
+      raw: project.body.raw,
+      code: project.body.code
+    }
+  }))
+
+  let filteredProjects = tag ? projects.filter(project => project.tag.includes(tag)) : projects
 
   return (
-    <FadeInStagger className='grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 p-5' faster>
-      <AnimatePresence mode='wait'>
-        {filteredProjects.map(project => (
-          <FadeIn layout key={project.title} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
-            <ProjectCard data={project} />
-          </FadeIn>
-        ))}
-      </AnimatePresence>
-    </FadeInStagger>
+    <div className='min-h-screen h-full bg-gradient-to-b from-gray-900 to-gray-950 text-white'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 h-full flex flex-col'>
+        <ProjectShowcase projects={filteredProjects} selectedTag={tag} />
+      </div>
+    </div>
   )
 }

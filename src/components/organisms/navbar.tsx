@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { IoApps } from 'react-icons/io5'
 
 import { NavLink } from '@/components/atoms/nav-link'
 import { ThemeToggle } from '@/components/molecules/theme-toggler'
@@ -7,20 +8,32 @@ import { NavbarMobileBtn } from './navbar-mobile'
 
 export const Navbar = () => {
   return (
-    <nav className='md:grid grid-cols-12 border-b flex items-center justify-between relative z-10 bg-background overflow-x-auto'>
-      <Link href='/' className='md:border-r md:px-5 px-2.5 py-4 text-foreground md:col-span-3 lg:col-span-2 shrink-0 transition-colors'>
-        Tanveer Hussain
-      </Link>
-      <div className='md:col-span-9 lg:col-span-10 flex items-center justify-between'>
-        <ul className='md:flex items-center divide-x w-max border-r hidden shrink-0'>
+    <nav className='flex items-center justify-between px-4 py-2 bg-gray-900/80 backdrop-blur-md border-b border-gray-700/20 sticky top-0 z-50'>
+      <div className='flex items-center space-x-2'>
+        <div className='flex space-x-1.5 mr-4'>
+          <div className='w-3 h-3 rounded-full bg-red-500'></div>
+          <div className='w-3 h-3 rounded-full bg-yellow-500'></div>
+          <div className='w-3 h-3 rounded-full bg-green-500'></div>
+        </div>
+        <Link href='/' className='text-gray-200 font-medium hover:text-white transition-colors'>
+          Tanveer Hussain
+        </Link>
+      </div>
+
+      <div className='flex items-center'>
+        <ul className='md:flex items-center space-x-6 hidden'>
           {navMenu.map((menu, i) => (
-            <NavLink key={i} href={menu.path}>
-              {menu.name}
-            </NavLink>
+            <li key={i}>
+              <Link href={menu.path} className='text-gray-400 hover:text-gray-200 transition-colors text-sm'>
+                {menu.name}
+              </Link>
+            </li>
           ))}
         </ul>
-        <ThemeToggle />
-        <NavbarMobileBtn />
+        <div className='flex items-center ml-6 space-x-4'>
+          {/* <ThemeToggle /> */}
+          <NavbarMobileBtn />
+        </div>
       </div>
     </nav>
   )
@@ -28,23 +41,23 @@ export const Navbar = () => {
 
 export const navMenu = [
   {
-    name: '_hello',
+    name: 'Home',
     path: '/'
   },
   {
-    name: '_about-me',
+    name: 'About',
     path: '/about'
   },
   {
-    name: '_projects',
+    name: 'Projects',
     path: '/projects'
+  },
+  {
+    name: 'Articles',
+    path: '/articles'
   }
   // {
   //   name: '_guest-book',
   //   path: '/guest-book'
-  // },
-  // {
-  //   name: '_articles',
-  //   path: '/articles'
   // }
 ]

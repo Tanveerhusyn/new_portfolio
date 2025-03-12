@@ -1,0 +1,250 @@
+---
+title: 'Mastering TypeScript in React Applications'
+summary: 'Learn how to leverage TypeScript to build more robust and maintainable React applications with type safety and improved developer experience.'
+publishedDate: 'March 10, 2024'
+author: 'Tanveer Ahmed'
+coverImage: '/projects/blue-bank.webp'
+tag:
+  - React
+  - TypeScript
+  - Web Development
+featured: false
+---
+
+# Mastering TypeScript in React Applications
+
+TypeScript has become an essential tool for modern React development, providing type safety and improved developer experience. In this comprehensive guide, we'll explore how to effectively use TypeScript in your React applications to build more robust and maintainable code.
+
+## Why TypeScript for React?
+
+TypeScript offers several benefits when used with React:
+
+1. **Type Safety**: Catch errors at compile time rather than runtime
+2. **Better IDE Support**: Enhanced autocomplete, navigation, and refactoring
+3. **Self-Documenting Code**: Types serve as documentation for your components and functions
+4. **Improved Maintainability**: Makes it easier to understand and refactor code, especially in larger projects
+5. **Enhanced Component Props**: Clear definition of what props a component accepts
+
+## Setting Up a TypeScript React Project
+
+You can create a new React project with TypeScript using Create React App:
+
+```bash
+npx create-react-app my-app --template typescript
+```
+
+Or with Next.js:
+
+```bash
+npx create-next-app@latest my-app --typescript
+```
+
+## Typing Component Props
+
+One of the most common uses of TypeScript in React is typing component props:
+
+```tsx
+// Define the props interface
+interface ButtonProps {
+  text: string
+  onClick: () => void
+  variant?: 'primary' | 'secondary' | 'danger'
+  disabled?: boolean
+}
+
+// Use the interface to type your component props
+const Button: React.FC<ButtonProps> = ({ text, onClick, variant = 'primary', disabled = false }) => {
+  return (
+    <button className={`btn btn-${variant}`} onClick={onClick} disabled={disabled}>
+      {text}
+    </button>
+  )
+}
+```
+
+## Typing Hooks
+
+### useState
+
+```tsx
+// Basic primitive types
+const [count, setCount] = useState<number>(0)
+const [name, setName] = useState<string>('')
+const [isActive, setIsActive] = useState<boolean>(false)
+
+// Complex types
+interface User {
+  id: number
+  name: string
+  email: string
+}
+
+const [user, setUser] = useState<User | null>(null)
+```
+
+### useRef
+
+```tsx
+// Ref for DOM elements
+const inputRef = useRef<HTMLInputElement>(null)
+
+// Ref for values
+const prevCountRef = useRef<number>(0)
+```
+
+### useReducer
+
+```tsx
+interface State {
+  count: number
+  isLoading: boolean
+  error: string | null
+}
+
+type Action = { type: 'INCREMENT' } | { type: 'DECREMENT' } | { type: 'SET_LOADING'; payload: boolean } | { type: 'SET_ERROR'; payload: string }
+
+const reducer = (state: State, action: Action): State => {
+  switch (action.type) {
+    case 'INCREMENT':
+      return { ...state, count: state.count + 1 }
+    case 'DECREMENT':
+      return { ...state, count: state.count - 1 }
+    case 'SET_LOADING':
+      return { ...state, isLoading: action.payload }
+    case 'SET_ERROR':
+      return { ...state, error: action.payload }
+    default:
+      return state
+  }
+}
+
+// Initial state
+const initialState: State = {
+  count: 0,
+  isLoading: false,
+  error: null
+}
+
+// In your component
+const [state, dispatch] = useReducer(reducer, initialState)
+```
+
+## Typing Context
+
+TypeScript can be particularly helpful when working with React Context:
+
+```tsx
+// Define the context type
+interface ThemeContextType {
+  theme: 'light' | 'dark'
+  toggleTheme: () => void
+}
+
+// Create the context with a default value
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
+
+// Create a provider component
+export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [theme, setTheme] = useState<'light' | 'dark'>('light')
+
+  const toggleTheme = () => {
+    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'))
+  }
+
+  return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>
+}
+
+// Create a custom hook to use the context
+export const useTheme = (): ThemeContextType => {
+  const context = useContext(ThemeContext)
+  if (context === undefined) {
+    throw new Error('useTheme must be used within a ThemeProvider')
+  }
+  return context
+}
+```
+
+## Typing Event Handlers
+
+TypeScript provides types for DOM events in React:
+
+```tsx
+// Input change event
+const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  setName(event.target.value)
+}
+
+// Form submit event
+const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  event.preventDefault()
+  // Form submission logic
+}
+
+// Button click event
+const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  // Click logic
+}
+```
+
+## Advanced TypeScript Patterns for React
+
+### Generic Components
+
+```tsx
+interface ListProps<T> {
+  items: T[]
+  renderItem: (item: T) => React.ReactNode
+}
+
+function List<T>({ items, renderItem }: ListProps<T>) {
+  return (
+    <ul>
+      {items.map((item, index) => (
+        <li key={index}>{renderItem(item)}</li>
+      ))}
+    </ul>
+  )
+}
+
+// Usage
+;<List items={['Apple', 'Banana', 'Orange']} renderItem={item => <span>{item}</span>} />
+```
+
+### Discriminated Unions for Component States
+
+```tsx
+type LoadingState = {
+  status: 'loading'
+}
+
+type SuccessState<T> = {
+  status: 'success'
+  data: T
+}
+
+type ErrorState = {
+  status: 'error'
+  error: string
+}
+
+type State<T> = LoadingState | SuccessState<T> | ErrorState
+
+function DataFetcher<T>({ state, renderSuccess }: { state: State<T>; renderSuccess: (data: T) => React.ReactNode }) {
+  switch (state.status) {
+    case 'loading':
+      return <div>Loading...</div>
+    case 'success':
+      return <>{renderSuccess(state.data)}</>
+    case 'error':
+      return <div>Error: {state.error}</div>
+  }
+}
+```
+
+## Conclusion
+
+TypeScript is a powerful tool for React development that can significantly improve code quality and developer experience. By properly typing your components, hooks, and events, you can catch errors early, improve code readability, and make your codebase more maintainable.
+
+As you continue to work with TypeScript and React, you'll discover more advanced patterns and techniques that can further enhance your development workflow. The key is to start with the basics and gradually incorporate more advanced TypeScript features as you become more comfortable with the language.
+
+Happy coding!

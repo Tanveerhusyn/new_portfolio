@@ -1,9 +1,9 @@
 'use client'
 import Link from 'next/link'
-import { Menu } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { Fragment, createContext, useContext, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 
-import { FadeIn, AnimatePresence } from '@/components/atoms/fade-in'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/atoms/accordion'
 
 interface NavbarMobileContextProps {
@@ -32,11 +32,11 @@ export const useNavbarMobile = (): NavbarMobileContextProps => {
 }
 
 export const NavbarMobileBtn: React.FC = () => {
-  const { toggleNavbar } = useNavbarMobile()
+  const { isOpen, toggleNavbar } = useNavbarMobile()
 
   return (
-    <button className='text-muted-foreground ml-auto px-2.5 block md:hidden' onClick={toggleNavbar} data-umami-event='navbar-mobile-trigger'>
-      <Menu />
+    <button className='text-gray-400 hover:text-gray-200 transition-colors block md:hidden' onClick={toggleNavbar}>
+      {isOpen ? <X size={20} /> : <Menu size={20} />}
     </button>
   )
 }
@@ -47,36 +47,69 @@ export const NavbarMobile = () => {
   return (
     <AnimatePresence>
       {isOpen && (
-        <FadeIn fromTopToBottom className='absolute top-[57px] left-0 bg-background h-[calc(100%-57px-27px)] w-full z-50 p-5 divide-y overflow-y-auto'>
-          {navMenu.map((menu, i) => (
-            <Fragment key={i}>
-              {menu.child ? (
-                <Accordion type='single' collapsible>
-                  <AccordionItem value={menu.name}>
-                    <AccordionTrigger className='text-2xl font-normal text-foreground' data-umami-event={`navbar-accordion-${menu.name}`}>
-                      {menu.name}
-                    </AccordionTrigger>
-                    <AccordionContent className='pl-5 divide-y'>
-                      {menu.child.map((child, j) => (
-                        <Link href={child.path} key={j} className='block text-xl py-2 first:pt-0 last:pb-0 border-b last:border-0 text-muted-foreground' onClick={toggleNavbar}>
-                          {child.name}
-                        </Link>
-                      ))}
-                    </AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-              ) : (
-                <Link href={menu.path} className='block text-2xl py-4 first:pt-0 last:pb-0' onClick={toggleNavbar}>
-                  {menu.name}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.2 }}
+          className='fixed top-[42px] left-0 right-0 bg-gray-900/95 backdrop-blur-md z-50 border-b border-gray-700/20 shadow-xl'
+        >
+          <div className='max-h-[70vh] overflow-y-auto py-4 px-6'>
+            <div className='grid gap-4'>
+              {mobileNavItems.map((item, i) => (
+                <Link
+                  key={i}
+                  href={item.path}
+                  className='text-gray-300 hover:text-white transition-colors py-2 border-b border-gray-800/50 flex items-center'
+                  onClick={toggleNavbar}
+                >
+                  {item.name}
                 </Link>
-              )}
-            </Fragment>
-          ))}
-        </FadeIn>
+              ))}
+            </div>
+
+            <div className='mt-6 pt-4 border-t border-gray-800/50'>
+              <div className='text-xs text-gray-500 mb-3'>Connect with me</div>
+              <div className='grid grid-cols-2 gap-3'>
+                <Link href='mailto:tanveerhussain465@gmail.com' className='text-gray-400 hover:text-gray-200 transition-colors text-sm' onClick={toggleNavbar}>
+                  Email
+                </Link>
+                <Link href='https://github.com/tanveerhusyn' className='text-gray-400 hover:text-gray-200 transition-colors text-sm' onClick={toggleNavbar}>
+                  GitHub
+                </Link>
+                <Link href='https://linkedin.com/in/tanveerhusyn' className='text-gray-400 hover:text-gray-200 transition-colors text-sm' onClick={toggleNavbar}>
+                  LinkedIn
+                </Link>
+                <Link href='https://wa.me/+923085135289' className='text-gray-400 hover:text-gray-200 transition-colors text-sm' onClick={toggleNavbar}>
+                  WhatsApp
+                </Link>
+              </div>
+            </div>
+          </div>
+        </motion.div>
       )}
     </AnimatePresence>
   )
 }
+
+const mobileNavItems = [
+  {
+    name: 'Home',
+    path: '/'
+  },
+  {
+    name: 'About',
+    path: '/about'
+  },
+  {
+    name: 'Projects',
+    path: '/projects'
+  },
+  {
+    name: 'Articles',
+    path: '/articles'
+  }
+]
 
 export const navMenu = [
   {
@@ -85,20 +118,7 @@ export const navMenu = [
   },
   {
     name: '_about-me',
-    child: [
-      {
-        name: 'personal.ts',
-        path: '/about/personal.ts'
-      },
-      {
-        name: 'work.ts',
-        path: '/about/work.ts'
-      },
-      {
-        name: 'gear.ts',
-        path: '/about/gear.ts'
-      }
-    ]
+    path: '/about'
   },
   {
     name: '_projects',

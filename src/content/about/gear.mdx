@@ -13,28 +13,38 @@ const GITHUB = 'github.com/tanveerhusyn'
 const LINKEDIN = 'linkedin.com/in/tanveerhusyn'
 const PORTFOLIO = 'portfolio-tanveer.netlify.app'
 
+// Professional Summary
+const SUMMARY = `
+  Passionate and detail-oriented Software Engineer with expertise in full-stack development.
+  Committed to creating efficient, scalable, and user-friendly applications.
+  Constantly learning and adapting to new technologies and methodologies.
+`
+
 // Educational Background
 let education = [
   {
     degree: 'Bachelors in Software Engineering',
     institution: 'COMSATS University Islamabad',
     location: 'Islamabad, PK',
-    period: 'Sep. 2019 – June 2023'
+    period: 'Sep. 2019 – June 2023',
+    achievements: ['CGPA: 3.5/4.0', "Dean's Honor List for academic excellence", 'Final Year Project: AI-Enhanced Web Search Platform']
   },
   {
     degree: 'Intermediate-ICS',
     institution: 'Punjab Group of Colleges',
     location: 'Rawalpindi, PK',
-    period: 'Aug. 2016 – May 2018'
+    period: 'Aug. 2016 – May 2018',
+    achievements: ['Graduated with distinction', 'Participated in multiple programming competitions']
   }
 ]
 
 // Technical Skills
 let skills = {
   languages: ['JavaScript', 'TypeScript', 'Java', 'Python', 'C/C++'],
-  frontend: ['ReactJS', 'HTML', 'CSS', 'TailwindCSS', 'MUI', 'Bootstrap'],
-  backend: ['Nodejs', 'ExpressJS', 'MongoDB', 'RESTAPI', 'Azure', 'AWS'],
-  others: ['Git', 'Docker', 'Jenkins']
+  frontend: ['ReactJS', 'NextJS', 'HTML', 'CSS', 'TailwindCSS', 'MUI', 'Bootstrap'],
+  backend: ['NodeJS', 'ExpressJS', 'MongoDB', 'REST API', 'Azure', 'AWS'],
+  tools: ['Git', 'Docker', 'Jenkins', 'Jira', 'Figma'],
+  softSkills: ['Problem Solving', 'Team Collaboration', 'Communication', 'Time Management']
 }
 
 // Work Experience
@@ -46,7 +56,9 @@ let experience = [
     responsibilities: [
       'Developed and maintained web applications with a focus on robust functionality and user-friendly interfaces.',
       'Integrated advanced encryption techniques to ensure data security and user privacy.',
-      'Collaborated in a team to design and deploy scalable software solutions.'
+      'Collaborated in a team to design and deploy scalable software solutions.',
+      'Implemented CI/CD pipelines to streamline development workflows.',
+      'Conducted code reviews and mentored junior developers.'
     ]
   },
   {
@@ -56,7 +68,9 @@ let experience = [
     responsibilities: [
       'Developed web applications using a range of technologies and frameworks.',
       'Worked closely with clients to understand requirements and deliver tailored solutions.',
-      'Utilized web design skills to enhance user experience and accessibility.'
+      'Utilized web design skills to enhance user experience and accessibility.',
+      'Managed multiple projects simultaneously while meeting deadlines.',
+      'Maintained long-term client relationships through quality work and communication.'
     ]
   }
 ]
@@ -66,23 +80,55 @@ let projects = [
   {
     name: 'Verdict.com',
     description: 'AI-Enhanced Web Search Platform - Full Stack',
-    technologies: ['ReactJS', 'NodeJS', 'ExpressJS', 'MongoDB'],
+    technologies: ['ReactJS', 'NodeJS', 'ExpressJS', 'MongoDB', 'OpenAI API'],
     period: 'Aug 2023 – Present',
     highlights: [
       'Revolutionized user experience with an intuitive UI.',
       'Integrated APIs from multiple search engines.',
-      'Integrated cutting-edge AI to enhance search capabilities.'
-    ]
+      'Integrated cutting-edge AI to enhance search capabilities.',
+      'Implemented responsive design for optimal viewing on all devices.',
+      'Utilized advanced caching techniques to improve performance.'
+    ],
+    link: 'https://verdict.com'
   },
   {
     name: 'Cornucopia-AI.com',
     description: 'AI Marketplace - NodeJS, MongoDB, ExpressJS, OpenAI',
     period: 'Oct 2023 – Present',
+    technologies: ['NodeJS', 'MongoDB', 'ExpressJS', 'ReactJS', 'OpenAI API', 'Stripe'],
     highlights: [
       'Architected a robust backend infrastructure ensuring data integrity.',
       'Integrated external APIs to optimize functionality.',
-      'Enhanced user experience with a secure payment gateway.'
-    ]
+      'Enhanced user experience with a secure payment gateway.',
+      'Implemented user authentication and authorization.',
+      'Designed and developed an admin dashboard for content management.'
+    ],
+    link: 'https://cornucopia-ai.com'
   }
 ]
+
+// Certifications
+let certifications = [
+  {
+    name: 'AWS Certified Developer - Associate',
+    issuer: 'Amazon Web Services',
+    date: 'Jan 2023',
+    link: 'https://aws.amazon.com/certification/certified-developer-associate/'
+  },
+  {
+    name: 'MongoDB Certified Developer',
+    issuer: 'MongoDB University',
+    date: 'Mar 2022',
+    link: 'https://university.mongodb.com/certification'
+  }
+]
+
+// Languages
+let languages = [
+  { name: 'English', proficiency: 'Professional' },
+  { name: 'Urdu', proficiency: 'Native' }
+]
+
+// Interests
+let interests = ['Open Source Contribution', 'AI and Machine Learning', 'Web Development', 'Mobile App Development', 'Reading Tech Blogs', 'Problem Solving']
 ```

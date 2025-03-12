@@ -14,12 +14,15 @@ declare module 'next-auth' {
   }
 }
 
+// Create a custom adapter to avoid type issues
+const customPrismaAdapter = PrismaAdapter(db) as any
+
 export const {
   handlers: { GET, POST },
   auth
 } = NextAuth({
   secret: ENV.AUTH_SECRET,
-  adapter: PrismaAdapter(db),
+  adapter: customPrismaAdapter,
   providers: [
     GitHub({
       clientId: ENV.GITHUB_CLIENT_ID,

@@ -11,6 +11,15 @@ const nextConfig = {
       enabled: true
     }
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'developersdens.com',
+        pathname: '/assets/**'
+      }
+    ]
+  },
   logging: {
     fetches: {
       fullUrl: true
@@ -19,8 +28,18 @@ const nextConfig = {
   redirects() {
     return [
       {
-        source: '/about',
-        destination: '/about/personal.ts',
+        source: '/about/personal.ts',
+        destination: '/about',
+        permanent: true
+      },
+      {
+        source: '/about/work.ts',
+        destination: '/about',
+        permanent: true
+      },
+      {
+        source: '/about/gear.ts',
+        destination: '/about',
         permanent: true
       }
     ]

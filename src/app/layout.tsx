@@ -10,6 +10,7 @@ import { Navbar } from '@/components/organisms/navbar'
 import { NavbarMobile, NavbarProvider } from '@/components/organisms/navbar-mobile'
 import { Footer } from '@/components/organisms/footer'
 import { ResponsiveIndicator } from '@/components/atoms/responsive-indicator'
+import { MacDock } from '@/components/molecules/mac-dock'
 
 import { ENV } from '@/lib/constants'
 
@@ -66,6 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </NavbarProvider>
             {children}
             <Footer />
+            <MacDock />
           </main>
         </ThemeWrapper>
         {process.env.NODE_ENV === 'production' && (
