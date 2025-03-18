@@ -5,7 +5,7 @@ import { AnimatedName } from '@/components/molecules/animated-name'
 
 export default function Home() {
   return (
-    <section className='flex items-center justify-center gap-24 p-5 bg-gradient-to-br from-gray-900 to-gray-950'>
+    <section className='flex flex-col-reverse md:flex-row items-center justify-center md:gap-24 gap-12 p-5 bg-gradient-to-br from-gray-900 to-gray-950'>
       <FadeIn>
         <div className='md:space-y-10 space-y-8 relative z-10'>
           <header>
@@ -52,9 +52,9 @@ export default function Home() {
       </FadeIn>
 
       {/* Profile Image */}
-      <FadeIn className='md:block hidden'>
+      <FadeIn className='block'>
         <div className='relative'>
-          <div className='relative w-[320px] h-[320px] rounded-xl overflow-hidden border border-gray-300/30 group hover:scale-105 transition-transform duration-300 shadow-xl bg-background/80 backdrop-blur-sm'>
+          <div className='relative w-[240px] h-[240px] md:w-[320px] md:h-[320px] rounded-xl overflow-hidden border border-gray-300/30 group hover:scale-105 transition-transform duration-300 shadow-xl bg-background/80 backdrop-blur-sm'>
             {/* macOS-like header */}
             <div className='absolute top-0 left-0 w-full h-10 bg-gray-100/10 backdrop-blur-md z-10 flex items-center px-4 border-b border-gray-300/20'>
               <div className='flex space-x-2'>
@@ -79,7 +79,7 @@ export default function Home() {
                 alt='Tanveer Hussain'
                 fill
                 className='object-cover object-center grayscale-0 transition-all duration-700 scale-100 group-hover:scale-105'
-                sizes='320px'
+                sizes='(max-width: 768px) 240px, 320px'
                 priority
               />
             </div>
@@ -119,9 +119,9 @@ export default function Home() {
           </div>
 
           {/* Decorative elements */}
-          <div className='absolute -bottom-2 -right-2 w-[320px] h-[320px] border border-gray-300/20 rounded-xl -z-10 shadow-lg'></div>
-          <div className='absolute -top-2 -left-2 w-[320px] h-[320px] border border-gray-300/10 rounded-xl -z-10'></div>
-          <div className='absolute -bottom-4 -right-4 w-[320px] h-[320px] bg-gradient-to-br from-gray-500/5 to-gray-700/5 rounded-xl -z-20 blur-sm'></div>
+          <div className='absolute -bottom-2 -right-2 w-[240px] h-[240px] md:w-[320px] md:h-[320px] border border-gray-300/20 rounded-xl -z-10 shadow-lg'></div>
+          <div className='absolute -top-2 -left-2 w-[240px] h-[240px] md:w-[320px] md:h-[320px] border border-gray-300/10 rounded-xl -z-10'></div>
+          <div className='absolute -bottom-4 -right-4 w-[240px] h-[240px] md:w-[320px] md:h-[320px] bg-gradient-to-br from-gray-500/5 to-gray-700/5 rounded-xl -z-20 blur-sm'></div>
         </div>
       </FadeIn>
 

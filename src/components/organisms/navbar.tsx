@@ -55,6 +55,10 @@ export const navMenu = [
   {
     name: 'Articles',
     path: '/articles'
+  },
+  {
+    name: 'Visitors Board',
+    path: '/messages'
   }
   // {
   //   name: '_guest-book',

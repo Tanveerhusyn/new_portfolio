@@ -108,6 +108,10 @@ const mobileNavItems = [
   {
     name: 'Articles',
     path: '/articles'
+  },
+  {
+    name: 'Visitors Board',
+    path: '/messages'
   }
 ]
 
@@ -148,6 +152,10 @@ export const navMenu = [
   {
     name: '_articles',
     path: '/articles'
+  },
+  {
+    name: '_visitors-board',
+    path: '/messages'
   },
   {
     name: '_coding-activity',

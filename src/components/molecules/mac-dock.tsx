@@ -56,7 +56,7 @@ const DockItem = ({ icon, label, href, mouseX, index, dockWidth, itemCount, isAc
       initial='initial'
       whileHover='hover'
     >
-      <motion.div className='w-12 h-12 flex items-center justify-center bg-gradient-to-b from-gray-700/90 to-gray-800/90 backdrop-blur-md rounded-xl border border-gray-600/50 shadow-lg'>
+      <motion.div className='w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center bg-gradient-to-b from-gray-700/90 to-gray-800/90 backdrop-blur-md rounded-xl border border-gray-600/50 shadow-lg'>
         {icon}
       </motion.div>
 
@@ -81,7 +81,7 @@ const DockItem = ({ icon, label, href, mouseX, index, dockWidth, itemCount, isAc
     return (
       <a href={href} target='_blank' rel='noopener noreferrer' className='flex flex-col items-center'>
         {content}
-        <span className='mt-1 text-[10px] text-gray-300 font-medium opacity-80'>{label}</span>
+        <span className='hidden sm:inline-block mt-1 text-[8px] sm:text-[10px] text-gray-300 font-medium opacity-80'>{label}</span>
       </a>
     )
   }
@@ -89,7 +89,7 @@ const DockItem = ({ icon, label, href, mouseX, index, dockWidth, itemCount, isAc
   return (
     <Link href={href} className='flex flex-col items-center'>
       {content}
-      <span className='mt-1 text-[10px] text-gray-300 font-medium opacity-80'>{label}</span>
+      <span className='hidden sm:inline-block mt-1 text-[8px] sm:text-[10px] text-gray-300 font-medium opacity-80'>{label}</span>
     </Link>
   )
 }
@@ -140,8 +140,8 @@ export const MacDock = () => {
   const navigationItems = [
     {
       icon: (
-        <div className='bg-gradient-to-br from-blue-400 to-blue-600 w-8 h-8 rounded-lg flex items-center justify-center shadow-inner shadow-white/10'>
-          <HomeIcon className='w-5 h-5 text-white' />
+        <div className='bg-gradient-to-br from-blue-400 to-blue-600 w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg flex items-center justify-center shadow-inner shadow-white/10'>
+          <HomeIcon className='w-4 h-4 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white' />
         </div>
       ),
       label: 'Home',
@@ -149,8 +149,8 @@ export const MacDock = () => {
     },
     {
       icon: (
-        <div className='bg-gradient-to-br from-purple-400 to-purple-600 w-8 h-8 rounded-lg flex items-center justify-center shadow-inner shadow-white/10'>
-          <UserIcon className='w-5 h-5 text-white' />
+        <div className='bg-gradient-to-br from-purple-400 to-purple-600 w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg flex items-center justify-center shadow-inner shadow-white/10'>
+          <UserIcon className='w-4 h-4 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white' />
         </div>
       ),
       label: 'About',
@@ -158,8 +158,8 @@ export const MacDock = () => {
     },
     {
       icon: (
-        <div className='bg-gradient-to-br from-green-400 to-green-600 w-8 h-8 rounded-lg flex items-center justify-center shadow-inner shadow-white/10'>
-          <FolderIcon className='w-5 h-5 text-white' />
+        <div className='bg-gradient-to-br from-green-400 to-green-600 w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg flex items-center justify-center shadow-inner shadow-white/10'>
+          <FolderIcon className='w-4 h-4 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white' />
         </div>
       ),
       label: 'Projects',
@@ -167,20 +167,29 @@ export const MacDock = () => {
     },
     {
       icon: (
-        <div className='bg-gradient-to-br from-indigo-400 to-indigo-600 w-8 h-8 rounded-lg flex items-center justify-center shadow-inner shadow-white/10'>
-          <BookOpenIcon className='w-5 h-5 text-white' />
+        <div className='bg-gradient-to-br from-indigo-400 to-indigo-600 w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg flex items-center justify-center shadow-inner shadow-white/10'>
+          <BookOpenIcon className='w-4 h-4 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white' />
         </div>
       ),
       label: 'Articles',
       href: '/articles'
+    },
+    {
+      icon: (
+        <div className='bg-gradient-to-br from-amber-400 to-amber-600 w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg flex items-center justify-center shadow-inner shadow-white/10'>
+          <FileTextIcon className='w-4 h-4 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white' />
+        </div>
+      ),
+      label: 'Visitors Board',
+      href: '/messages'
     }
   ]
 
   const utilityItems = [
     {
       icon: (
-        <div className='bg-gradient-to-br from-red-400 to-red-600 w-8 h-8 rounded-lg flex items-center justify-center shadow-inner shadow-white/10'>
-          <MailIcon className='w-5 h-5 text-white' />
+        <div className='bg-gradient-to-br from-red-400 to-red-600 w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg flex items-center justify-center shadow-inner shadow-white/10'>
+          <MailIcon className='w-4 h-4 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white' />
         </div>
       ),
       label: 'Contact',
@@ -188,8 +197,8 @@ export const MacDock = () => {
     },
     {
       icon: (
-        <div className='bg-gradient-to-br from-gray-600 to-gray-800 w-8 h-8 rounded-lg flex items-center justify-center shadow-inner shadow-white/10'>
-          <GithubIcon className='w-5 h-5 text-white' />
+        <div className='bg-gradient-to-br from-gray-600 to-gray-800 w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg flex items-center justify-center shadow-inner shadow-white/10'>
+          <GithubIcon className='w-4 h-4 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white' />
         </div>
       ),
       label: 'GitHub',
@@ -197,8 +206,8 @@ export const MacDock = () => {
     },
     {
       icon: (
-        <div className='bg-gradient-to-br from-blue-500 to-blue-700 w-8 h-8 rounded-lg flex items-center justify-center shadow-inner shadow-white/10'>
-          <LinkedinIcon className='w-5 h-5 text-white' />
+        <div className='bg-gradient-to-br from-blue-500 to-blue-700 w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg flex items-center justify-center shadow-inner shadow-white/10'>
+          <LinkedinIcon className='w-4 h-4 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white' />
         </div>
       ),
       label: 'LinkedIn',
@@ -206,8 +215,8 @@ export const MacDock = () => {
     },
     {
       icon: (
-        <div className='bg-gradient-to-br from-teal-400 to-teal-600 w-8 h-8 rounded-lg flex items-center justify-center shadow-inner shadow-white/10'>
-          <DownloadIcon className='w-5 h-5 text-white' />
+        <div className='bg-gradient-to-br from-teal-400 to-teal-600 w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg flex items-center justify-center shadow-inner shadow-white/10'>
+          <DownloadIcon className='w-4 h-4 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white' />
         </div>
       ),
       label: 'Download CV',
@@ -268,18 +277,19 @@ export const MacDock = () => {
   }, [])
 
   return (
-    <div className='fixed bottom-0 left-0 right-0 flex justify-center items-center pb-6 z-50 pointer-events-none'>
+    <div className='fixed bottom-0 left-0 right-0 hidden md:flex justify-center items-center pb-6 z-50 pointer-events-none'>
       <motion.div
         ref={dockRef}
         variants={containerVariants}
         initial='hidden'
         animate='visible'
-        className='px-6 py-3 bg-gray-800/60 backdrop-blur-md rounded-2xl border border-gray-700/30 shadow-2xl pointer-events-auto'
+        className='px-2 sm:px-4 md:px-6 py-2 md:py-3 bg-gray-800/60 backdrop-blur-md rounded-2xl border border-gray-700/30 shadow-2xl pointer-events-auto max-w-[95vw] overflow-x-auto'
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
       >
         <div className='flex items-center'>
-          <div className='flex items-center space-x-4'>
+          {/* Main navigation items */}
+          <div className='flex items-center space-x-2 md:space-x-4'>
             {navigationItems.map((item, index) => (
               <motion.div key={`nav-${index}`} variants={itemVariants}>
                 <DockItem
@@ -297,9 +307,10 @@ export const MacDock = () => {
           </div>
 
           {/* Separator */}
-          <motion.div className='mx-4 h-10 w-px bg-gray-700/50' variants={itemVariants}></motion.div>
+          <motion.div className='mx-2 md:mx-4 h-10 w-px bg-gray-700/50' variants={itemVariants}></motion.div>
 
-          <div className='flex items-center space-x-4'>
+          {/* Utility items */}
+          <div className='flex items-center space-x-2 md:space-x-4'>
             {utilityItems.map((item, index) => (
               <motion.div key={`util-${index}`} variants={itemVariants}>
                 <DockItem

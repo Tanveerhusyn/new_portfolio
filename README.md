@@ -15,6 +15,8 @@
 - [Shadcn UI](https://ui.shadcn.com/) - Beautifully designed components built with Radix UI and Tailwind CSS.
 - [Next Auth](https://next-auth.js.org) - NextAuth.js is a complete open-source authentication solution for Next.js applications.
 - [Prisma](https://www.prisma.io) - an open-source ORM that drastically simplifies data modeling, migrations, and data access for SQL databases in Node.js and TypeScript.
+- [MongoDB](https://www.mongodb.com/) - A document database with the scalability and flexibility that you want with the querying and indexing that you need.
+- [Mongoose](https://mongoosejs.com/) - An elegant MongoDB object modeling for Node.js.
 
 ## Running Locally
 
@@ -27,7 +29,7 @@ pnpm install
 pnpm dev
 ```
 
-Create a .env file similar to .env.example.
+Create a .env file similar to .env.example. The project supports both PostgreSQL (via Prisma) and MongoDB (via Mongoose).
 
 ## Cloning / Forking
 

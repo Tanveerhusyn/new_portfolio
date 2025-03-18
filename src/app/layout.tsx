@@ -54,6 +54,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='en' suppressHydrationWarning>
+      <head>
+        <link href='https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Indie+Flower&display=swap' rel='stylesheet' />
+      </head>
       <body className={`${GeistSans.variable} ${GeistMono.variable} font-mono relative`}>
         <video playsInline autoPlay muted loop>
           <source src='/background-vid.mp4' type='video/mp4' />

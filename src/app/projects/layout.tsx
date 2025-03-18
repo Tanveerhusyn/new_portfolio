@@ -11,5 +11,5 @@ const image = `${ENV.NEXT_PUBLIC_WEBSITE_URL}/api/og?title=${title}`
 export const metadata = generateSEO(title, description, image, url)
 
 export default function ProjectsLayout({ children }: { children: React.ReactNode }) {
-  return <section className='h-full w-full'>{children}</section>
+  return <section className='overflow-y-auto h-full w-full'>{children}</section>
 }

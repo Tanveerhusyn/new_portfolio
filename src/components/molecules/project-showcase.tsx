@@ -82,7 +82,7 @@ export function ProjectShowcase({ projects, selectedTag }: ProjectShowcaseProps)
 
       {/* Grid Projects Container */}
       <div className='flex-grow overflow-y-auto custom-scrollbar pr-2 py-4'>
-        <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 perspective-1000'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5'>
           {projects.map((project, index) => (
             <motion.div
               key={project.slug}
@@ -99,7 +99,7 @@ export function ProjectShowcase({ projects, selectedTag }: ProjectShowcaseProps)
                 z: 20,
                 transition: { duration: 0.3 }
               }}
-              className='relative group cursor-pointer'
+              className='relative group cursor-pointer h-full'
               onClick={() => setActiveProject(index)}
             >
               <div className='relative h-full overflow-hidden rounded-xl bg-gray-800/50 border border-gray-700/50 group-hover:border-blue-500/50 transition-all duration-300 transform-gpu preserve-3d shadow-xl'>
