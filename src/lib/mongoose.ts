@@ -2,45 +2,39 @@ import mongoose from 'mongoose'
 
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/portfolio'
 
-/**
- * Global is used here to maintain a cached connection across hot reloads
- * in development. This prevents connections growing exponentially
- * during API Route usage.
- */
-let cached = global.mongoose
-
-if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null }
+// Connection cache object
+const connectionCache: {
+  conn: any | null
+  promise: Promise<any> | null
+} = {
+  conn: null,
+  promise: null
 }
 
 export async function connectToDatabase() {
-  if (cached.conn) {
-    return cached.conn
+  // If we have a connection, return it
+  if (connectionCache.conn) {
+    return connectionCache.conn
   }
 
-  if (!cached.promise) {
+  // If we don't have a promise to connect yet, create one
+  if (!connectionCache.promise) {
     const opts = {
       bufferCommands: false
     }
 
-    cached.promise = mongoose
-      .connect(MONGODB_URI, opts)
-      .then(mongoose => {
-        console.log('Connected to MongoDB')
-        return mongoose
-      })
-      .catch(error => {
-        console.error('Error connecting to MongoDB:', error)
-        throw error
-      })
+    connectionCache.promise = mongoose.connect(MONGODB_URI, opts).then(mongoose => {
+      return mongoose
+    })
   }
 
   try {
-    cached.conn = await cached.promise
+    // Wait for the connection
+    connectionCache.conn = await connectionCache.promise
+    return connectionCache.conn
   } catch (e) {
-    cached.promise = null
+    // If there's an error, clear the promise so we can try again
+    connectionCache.promise = null
     throw e
   }
-
-  return cached.conn
 }
